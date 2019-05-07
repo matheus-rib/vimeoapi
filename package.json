@@ -1,0 +1,20 @@
+{
+  "name": "vimeoapi",
+  "version": "1.0.0",
+  "description": "Basic Vimeo video upload API",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Matheus Ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "vimeo": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
