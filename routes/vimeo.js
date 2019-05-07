@@ -6,33 +6,26 @@ const access_token = vimeoConfigs.accessToken;
 const client_id = vimeoConfigs.clientId;
 const client_secret = vimeoConfigs.clientSecret;
 
-/*const filename = document.getElementById("videoUploader");
-const filePath = "../tmp/" + filename;*/
-
-
 router.get('/', (req, res) => {
-    res.json({
-        msg: "users works"
-    });
-    /*let Vimeo = require('vimeo').Vimeo;
+    let Vimeo = require('vimeo').Vimeo;
     let client = new Vimeo(client_id, client_secret, access_token);
-    let file_name = filePath;
+    let file_name = pathFile;
     client.upload(
-      file_name,
-      {
-        'name': filename,
-        'description': 'API Video Upload for a job application @Tecnospeed'
-      },
-      (uri) => {
-        console.log('Your video URI is: ' + uri);
-      },
-      (bytes_uploaded, bytes_total) => {
-        var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
-        console.log(bytes_uploaded, bytes_total, percentage + '%')
-      },
-      (error) => {
-        console.log('Failed because: ' + error)
-      }
+        file_name,
+        {
+            'name': fileName,
+            'description': 'API Video Upload for a job application @Tecnospeed'
+        },
+        (uri) => {
+            console.log('Your video URI is: ' + uri);
+        },
+        (bytes_uploaded, bytes_total) => {
+            var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
+            console.log(bytes_uploaded, bytes_total, percentage + '%')
+        },
+        (error) => {
+            console.log('Failed because: ' + error)
+        }
     );
 
     client.request(uri + '?fields=transcode.status', (error, body, status_code, headers) => {
@@ -43,17 +36,17 @@ router.get('/', (req, res) => {
         }else{
           console.log('Your video encountered an error during transcoding.')
         }
-      });
+    });
 
-      client.request(uri + '?fields=link', (error, body, statusCode, headers) => {
+    client.request(uri + '?fields=link', (error, body, statusCode, headers) => {
         if(error){
-          console.log('There was an error making the request.')
-          console.log('Server reported: ' + error)
-          return
+            console.log('There was an error making the request.')
+            console.log('Server reported: ' + error)
+            return
         }
-      
+    
         console.log('Your video link is: ' + body.link)
-      });*/
+    });
 });
 
 module.exports = router;
