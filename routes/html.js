@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const Upload = require('../controller/upload');
+const cleanTempFiles = require('../controller/cleanTempFiles');
 
 // Include the HTML Index / Video Preview page
 const router = express.Router();
@@ -9,7 +10,7 @@ router.get('/', (req, res) => {
     pathToRedirect = (Upload.modules.videoURL !== "") ? 'preview' : 'index';
     let link = Upload.modules.videoURL;
     res.render(pathToRedirect, { link: link });
-    
+    cleanTempFiles();
 });
 
 // Upload the files from the form
@@ -37,6 +38,12 @@ router.post('/', (req, res) => {
         res.redirect('/vimeo');
         res.end();
     });
+});
+
+router.post('/afterPreview', (req, res) => {
+    cleanTempFiles();
+    res.redirect('/');
+    res.end();
 });
 
 module.exports = router;

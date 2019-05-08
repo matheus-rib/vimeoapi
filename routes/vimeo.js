@@ -19,22 +19,22 @@ router.get('/', (req, res) => {
             'name': uploadedFile.modules.fileName,
             'description': 'API Video Upload for a job application @Tecnospeed'
         },
-        (uri) => {
-            videoProcessing = waitForProcess(uri, client);
+        async (uri) =>  {
+            videoProcessing = await waitForProcess(uri, client);
 
             if(videoProcessing.isReady){
                 client.request(uri + '?fields=link', (error, body) => {
                     if(body.link){
                         uploadedFile.modules.videoURL = body.link;
-                        console.log(body);
+                        console.log(body);            
+                        
+                        res.redirect('../');
+                        res.end();
                     }
                 });
             }else{
                 console.log(videoProcessing.error);
             }
-            
-            res.redirect('../');
-            res.end();
         },
         (bytes_uploaded, bytes_total) => {
             var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
