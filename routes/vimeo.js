@@ -7,13 +7,14 @@ const client_id = vimeoConfigs.clientId;
 const client_secret = vimeoConfigs.clientSecret;
 
 router.get('/', (req, res) => {
+    const fileSettings = require('../server');
     let Vimeo = require('vimeo').Vimeo;
     let client = new Vimeo(client_id, client_secret, access_token);
-    let file_name = pathFile;
+    let file_name = fileSettings.pathFile;
     client.upload(
         file_name,
         {
-            'name': fileName,
+            'name': fileSettings.fileName,
             'description': 'API Video Upload for a job application @Tecnospeed'
         },
         (uri) => {
