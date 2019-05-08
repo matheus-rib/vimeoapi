@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const uploadedFile = require('../controller/upload');
+const waitForProcess = require('../controller/transcoding');
 
 const vimeoConfigs = require('../config/vimeo');
 const access_token = vimeoConfigs.accessToken;
@@ -19,19 +20,21 @@ router.get('/', (req, res) => {
             'description': 'API Video Upload for a job application @Tecnospeed'
         },
         (uri) => {
-            client.request(uri + '?fields=transcode.status', (error, body) => {
-                console.log(body.transcode.status);
-            });
+            videoProcessing = waitForProcess(uri, client);
 
-            client.request(uri + '?fields=link', (error, body) => {
-                if(body.link){
-                    uploadedFile.modules.videoURL = body.link;
-                    //uploadedFile.modules.videoURL = body.embed.html.replace('\\','');
-                    console.log(body);
-                }
-                res.redirect('../');
-                res.end();
-            });
+            if(videoProcessing.isReady){
+                client.request(uri + '?fields=link', (error, body) => {
+                    if(body.link){
+                        uploadedFile.modules.videoURL = body.link;
+                        console.log(body);
+                    }
+                });
+            }else{
+                console.log(videoProcessing.error);
+            }
+            
+            res.redirect('../');
+            res.end();
         },
         (bytes_uploaded, bytes_total) => {
             var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
