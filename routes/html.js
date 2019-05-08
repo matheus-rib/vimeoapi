@@ -3,12 +3,12 @@ const path = require('path');
 
 const Upload = require('../controller/upload');
 
-// Include the HTML Index page
+// Include the HTML Index / Video Preview page
 const router = express.Router();
 router.get('/', (req, res) => {
-    pathToRedirect = (Upload.modules.videoURL !== "") ? path.join(__dirname, '../view/preview.html') : path.join(__dirname, '../view/index.html');
+    pathToRedirect = (Upload.modules.videoURL !== "") ? 'preview' : 'index';
     let link = Upload.modules.videoURL;
-    res.sendFile(pathToRedirect);
+    res.render('index', { link });
     
 });
 
@@ -40,8 +40,8 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/preview', (req, res) => {
+/*router.get('/preview', (req, res) => {
     res.sendFile(path.join(__dirname, '../view/preview.html'));
-});
+});*/
 
 module.exports = router;
