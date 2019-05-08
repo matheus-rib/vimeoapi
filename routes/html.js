@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     pathToRedirect = (Upload.modules.videoURL !== "") ? 'preview' : 'index';
     let link = Upload.modules.videoURL;
-    res.render('index', { link });
+    res.render(pathToRedirect, { link: link });
     
 });
 
@@ -33,15 +33,10 @@ router.post('/', (req, res) => {
         Upload.modules.fileName = fileName;
 
         //Include the Vimeo's route
-
         res.sendFile(pathFile);
         res.redirect('/vimeo');
         res.end();
     });
 });
-
-/*router.get('/preview', (req, res) => {
-    res.sendFile(path.join(__dirname, '../view/preview.html'));
-});*/
 
 module.exports = router;

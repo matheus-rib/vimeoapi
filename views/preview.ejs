@@ -7,14 +7,16 @@
 <body>
     <form action="/" method="get">
         <div id="videoPreview"></div>
-        <script src="https://player.vimeo.com/api/player.js"></script>
-        <script>            
+        <script src="https://player.vimeo.com/api/player.js"></script>     
+        <script src="/index.js"></script>     
+        <script>
             const options = {
-                url: "",
-                width: 400
+                width: 800
             }
-
+            options.link = <%= link %>
+            console.log(options);
             const videoPlayer = new Vimeo.Player('videoPreview', options);
+
         </script>
     </form>
 </body>

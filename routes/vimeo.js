@@ -26,6 +26,8 @@ router.get('/', (req, res) => {
             client.request(uri + '?fields=link', (error, body) => {
                 if(body.link){
                     uploadedFile.modules.videoURL = body.link;
+                    //uploadedFile.modules.videoURL = body.embed.html.replace('\\','');
+                    console.log(body);
                 }
                 res.redirect('../');
                 res.end();
