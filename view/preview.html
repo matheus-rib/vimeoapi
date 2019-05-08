@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Preview</title>
+</head>
+<body>
+    <form action="/" method="get">
+        <div id="videoPreview"></div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+        <script>
+           //const video = require('../controller/upload.js');
+            console.log(<%= name %>);
+            
+            const options = {
+                url: "https://vimeo.com/334866214",
+                width: 400
+            }
+
+            const videoPlayer = new Vimeo.Player('videoPreview', options);
+        </script>
+    </form>
+</body>
+</html>

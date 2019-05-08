@@ -9,6 +9,7 @@
   "author": "Matheus Ribeiro",
   "license": "ISC",
   "dependencies": {
+    "@vimeo/player": "^2.9.1",
     "express": "^4.16.4",
     "express-formidable": "^1.2.0",
     "formidable": "^1.2.1",
