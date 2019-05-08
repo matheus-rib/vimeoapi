@@ -7,9 +7,13 @@ const cleanTempFiles = require('../controller/cleanTempFiles');
 // Include the HTML Index / Video Preview page
 const router = express.Router();
 router.get('/', (req, res) => {
+    // If it has a Video URL, then it will load the video preview page, if not, it will send you back tp upload a file
     pathToRedirect = (Upload.modules.videoURL !== "") ? 'preview' : 'index';
     let link = Upload.modules.videoURL;
-    res.render(pathToRedirect, { link: link });
+    let fileName = Upload.modules.fileName;
+    res.render(pathToRedirect, { link: link, fileName:  fileName});
+
+    // Clean the tmp directoy and the Upload Object
     cleanTempFiles();
 });
 
@@ -24,12 +28,14 @@ router.post('/', (req, res) => {
         let pathFile = path.join(__dirname, "..\\tmp\\") + files.vimeoVideo.name;
         let fileName = files.vimeoVideo.name;
         
+        // Change the path from a temporary folder to tmp's API folder
         fs.rename(oldPath, pathFile, (err) => {
             if(err){
                 console.error(err);
             }
         });
 
+        // Attach some atributes to Upload File to it can be uploaded
         Upload.modules.pathFile = pathFile;
         Upload.modules.fileName = fileName;
 
@@ -41,6 +47,7 @@ router.post('/', (req, res) => {
 });
 
 router.post('/afterPreview', (req, res) => {
+    // Clean the tmp directoy and the Upload Object and send back to index.ejs
     cleanTempFiles();
     res.redirect('/');
     res.end();

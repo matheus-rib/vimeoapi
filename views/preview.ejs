@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Video Preview</title>
 </head>
-<body>
-    <form action="/" method="get">
+<body style="text-align: center">
+    <form action="/afterPreview" method="post">
+        <h1>Assistindo a: <%= fileName %></h1>
+        <br/>
         <div id="videoPreview"></div>
-        <input type="submit">
+        <br/>
+        <input type="submit" value="Voltar">
         <script src="https://player.vimeo.com/api/player.js"></script> 
         <script>
             const options = {
                 width: 800
             }
             options.url = '<%= link %>'
+
+            // Deploys the Vimeo Player with setted options
             const videoPlayer = new Vimeo.Player('videoPreview', options);
         </script>
     </form>

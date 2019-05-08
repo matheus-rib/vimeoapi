@@ -10,6 +10,7 @@ const client_id = vimeoConfigs.clientId;
 const client_secret = vimeoConfigs.clientSecret;
 
 router.get('/', (req, res) => {
+    // Initialize Vimeo
     let Vimeo = require('vimeo').Vimeo;
     let client = new Vimeo(client_id, client_secret, access_token);
     let file_name = uploadedFile.modules.pathFile;
@@ -20,11 +21,13 @@ router.get('/', (req, res) => {
             'description': 'API Video Upload for a job application @Tecnospeed'
         },
         async (uri) =>  {
+            // Wait for the video to get processed
             videoProcessing = await waitForProcess(uri, client);
 
             if(videoProcessing.isReady){
                 client.request(uri + '?fields=link', (error, body) => {
                     if(body.link){
+                        // Attach video's link to Upload Object so it can be accessed later
                         uploadedFile.modules.videoURL = body.link;
                         console.log(body);            
                         

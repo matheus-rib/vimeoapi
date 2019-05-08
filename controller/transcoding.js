@@ -1,3 +1,4 @@
+// Request transcode status until its return is complete or error so the API can continue
 module.exports = function waitProccess(uri, client){
 	return new Promise((resolve, reject) => {
 		const interval = setInterval(() => { 

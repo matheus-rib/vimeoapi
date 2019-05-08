@@ -4,7 +4,8 @@
   "description": "Basic Vimeo video upload API",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "nodemon": "nodemon server.js"
   },
   "author": "Matheus Ribeiro",
   "license": "ISC",

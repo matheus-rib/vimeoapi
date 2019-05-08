@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Load Index And Vimeo Routes
+// Load HTML (Front-end) And Vimeo Routes
 htmlRoute = require('./routes/html');
 vimeoRoute = require('./routes/vimeo');
 
