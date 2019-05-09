@@ -25,8 +25,15 @@ router.post('/', (req, res) => {
 
     form.parse(req, (err, fields, files) => {
         let oldPath = files.vimeoVideo.path;
-        let pathFile = oldPath + files.vimeoVideo.name;
+        let pathFile = path.join(__dirname, "..\\tmp\\") + files.vimeoVideo.name;
         let fileName = files.vimeoVideo.name;
+        
+        // Change the path from a temporary folder to tmp's API folder
+        fs.rename(oldPath, pathFile, (err) => {
+            if(err){
+                console.error(err);
+            }
+        });
 
         // Attach some atributes to Upload File to it can be uploaded
         Upload.modules.pathFile = pathFile;
