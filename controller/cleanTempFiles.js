@@ -4,7 +4,7 @@ const uploadCache = require('../controller/upload');
 
 module.exports = () => {
     // Clean the files existing in /tmp
-    let tempDirectory = path.join(__dirname, "..\\tmp\\");
+    let tempDirectory = path.join(__dirname, "..\\tempFiles\\");
     fs.readdir(tempDirectory, (err, files) => {
         if(err){
             throw err;

@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
 
     form.parse(req, (err, fields, files) => {
         let oldPath = files.vimeoVideo.path;
-        let pathFile = path.join(__dirname, "..\\tmp\\") + files.vimeoVideo.name;
+        let pathFile = path.join(__dirname, "..\\tempFiles\\") + files.vimeoVideo.name;
         let fileName = files.vimeoVideo.name;
         
         // Change the path from a temporary folder to tmp's API folder
