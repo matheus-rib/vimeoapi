@@ -10,11 +10,13 @@ module.exports = () => {
             throw err;
         }
         files.forEach((file) => {
-            fs.unlink(path.join(tempDirectory, file), err => {
-                if(err){
-                    throw err;
-                }
-            });
+            if(file !== ".gitignore"){
+                fs.unlink(path.join(tempDirectory, file), err => {
+                    if(err){
+                        throw err;
+                    }
+                });
+            }
         });
     });
 
